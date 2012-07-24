@@ -47,7 +47,7 @@ class UserStay(models.Model):
 	forum = models.ForeignKey(Forum)
 
 	last_seen = models.IntegerField()
-	mins = models.IntegerField()
+	secs = models.IntegerField()
 
 	def __unicode__(self):
 		return 'User points of "%s"' % self.user.username

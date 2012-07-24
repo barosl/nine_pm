@@ -30,4 +30,12 @@
 
 {% endif %}
 
+<hr />
+
+<h3>오늘의 부문별 1위</h3>
+
+{% for post in posts %}
+<a href="{% url nine_pm.views.post post.id %}">{{post.name}}</a><br />
+{% endfor %}
+
 {% endblock %}

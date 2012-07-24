@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<p>{{user.get_profile.name}} 님이 모은 {{post.forum.name}}의 시간은 {{hours}}시간 {{mins}}분입니다.</p>
+
+<form method="post" action="{% url nine_pm.views.post_vote post.id %}">
+	{% csrf_token %}
+
+	<input type="hidden" name="mode" value="1" />
+	<input type="submit" value="선물하긔" />
+</form>
+
+<p>꽃 한 송이를 선물하는 데 {{required_mins}}분이 소모됩니다.</p>
+
+{% endblock %}

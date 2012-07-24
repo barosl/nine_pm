@@ -14,7 +14,13 @@
 
 <hr />
 
-<a href="{% url nine_pm.views.recommend %}"><img src="{{STATIC_URL}}imgs/flower.png" alt="꽃 주기" /></a>
+<div>
+{% for flower in flowers %}
+<img src="{{STATIC_URL}}imgs/flower.png" alt="[꽃]" />
+{% endfor %}
+</div>
+
+<a href="{% url nine_pm.views.post_vote post.id %}">꽃 주기</a>
 
 <hr />
 
