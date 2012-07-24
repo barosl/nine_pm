@@ -14,4 +14,5 @@ urlpatterns = patterns('',
 	url(r'^post/(\d+)/$', post),
 	url(r'^comment/new/$', comment_new),
 	url(r'^post/(\d+)/vote/$', post_vote),
+	url(r'user_stay/(\d+)/$', user_stay),
 )

@@ -7,6 +7,7 @@ from models import *
 from datetime import datetime
 from forms import *
 from django.http import HttpResponse
+import time
 
 def index(req):
 	posts = [Post.objects.filter(forum=forum).order_by('-points')[0] for forum in Forum.objects.all()]
@@ -100,3 +101,16 @@ def post_vote(req, post_id):
 			'mins': user_stay.secs%3600//60,
 			'required_mins': post.forum.xch_rate,
 		}))
+
+@login_required
+def user_stay(req, forum_id):
+	forum = get_object_or_404(Forum, pk=forum_id)
+
+	try: user_stay = UserStay.objects.get(user=req.user, forum=forum)
+	except UserStay.DoesNotExist: user_stay = UserStay(user=req.user, forum=forum, secs=0)
+
+	user_stay.secs += 5
+	user_stay.last_seen = time.time()
+	user_stay.save()
+
+	return HttpResponse('/* nothing done here */', content_type='application/x-javascript')

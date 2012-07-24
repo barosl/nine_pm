@@ -4,6 +4,7 @@
 
 <h2>{{forum.name}}</h2>
 
+<script type="text/javascript">var forum_id = {{forum.id}};</script>
 <script type="text/javascript" src="{{STATIC_URL}}js/user-stay.js"></script>
 
 <form method="post" action="{% url nine_pm.views.post_new %}">

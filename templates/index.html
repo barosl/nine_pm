@@ -10,7 +10,9 @@
 
 <p>환영합니다, {{ user.get_profile.name }} 님. <a href="{% url django.contrib.auth.views.logout %}">[로그아웃]</a></p>
 
-<p><a href="{% url nine_pm.views.forums %}">입장하기</a></p>
+<form method="get" action="{% url nine_pm.views.forums %}">
+	<input type="submit" value="입장하긔" />
+</form>
 
 {% else %}
 
