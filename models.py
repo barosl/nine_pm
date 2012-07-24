@@ -7,6 +7,9 @@ class Forum(models.Model):
 	ex_rate = models.IntegerField()
 	img = models.ImageField(upload_to='forums')
 
+	def __unicode__(self):
+		return 'Forum named "%s"' % self.name
+
 class Post(models.Model):
 	forum = models.ForeignKey(Forum)
 	user = models.ForeignKey(User)
@@ -17,6 +20,9 @@ class Post(models.Model):
 	mtime = models.DateTimeField()
 	points = models.IntegerField()
 
+	def __unicode__(self):
+		return 'Post titled "%s"' % self.name
+
 class Comment(models.Model):
 	post = models.ForeignKey(Post)
 	user = models.ForeignKey(User)
@@ -25,13 +31,22 @@ class Comment(models.Model):
 	ctime = models.DateTimeField()
 	mtime = models.DateTimeField()
 
+	def __unicode__(self):
+		return 'Comment by "%s"' % self.user.username
+
 class UserProfile(models.Model):
 	user = models.OneToOneField(User)
 
 	name = models.CharField(max_length=100)
+
+	def __unicode__(self):
+		return 'User profile of "%s"' % self.user.username
 
 class UserPoints(models.Model):
 	user = models.ForeignKey(User)
 	forum = models.ForeignKey(Forum)
 	mtime = models.IntegerField()
 	points = models.IntegerField()
+
+	def __unicode__(self):
+		return 'User points of "%s"' % self.user.username
