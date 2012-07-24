@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block css %}
+	#id_text { width: 500px; height: 40px; }
+{% endblock %}
+
+{% block content %}
+
+<h2>{{post.name}}</h2>
+
+<div>
+	{{post.text}}
+</div>
+
+<hr />
+
+<a href="{% url nine_pm.views.recommend %}"><img src="{{STATIC_URL}}imgs/flower.png" alt="꽃 주기" /></a>
+
+<hr />
+
+<form method="post" action="{% url nine_pm.views.comment_new %}">
+	{% csrf_token %}
+	{{form.post}}
+
+	<label for="id_text">{{user.get_profile.name}}:</label>
+	{{form.text}}
+	<input type="submit" value="쓰기" />
+</form>
+
+<hr />
+
+{% for comment in comments %}
+{{comment.user.get_profile.name}}: {{comment.text}} ({{comment.ctime}})<br />
+{% endfor %}
+
+{% endblock %}

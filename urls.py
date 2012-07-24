@@ -10,5 +10,7 @@ urlpatterns = patterns('',
 	url(r'^intro/$', intro),
 	url(r'^forums/$', forums),
 	url(r'^forum/(\d+)/$', forum),
+	url(r'^post/new/$', post_new),
 	url(r'^post/(\d+)/$', post),
+	url(r'^comment/new/$', comment_new),
 )

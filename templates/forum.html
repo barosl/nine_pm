@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>{{forum.name}}</h2>
+
+<form method="post" action="{% url nine_pm.views.post_new %}">
+	{% csrf_token %}
+	{{form.forum}}
+
+	제목: {{form.name}}<br />
+	내용: {{form.text}}<br />
+	<input type="submit" value="쓰기" />
+</form>
+
+<hr />
+
+{% for post in posts %}
+
+<div>
+<a href="{% url nine_pm.views.post post.id %}">{{post.name}}</a>
+({{post.ctime}})
+/
+{{post.user.get_profile.name}}
+</div>
+
+{% endfor %}
+
+{% endblock %}
