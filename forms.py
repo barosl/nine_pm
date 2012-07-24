@@ -16,3 +16,8 @@ class CommentForm(forms.ModelForm):
 		widgets = {
 			'post': forms.HiddenInput,
 		}
+
+class UserProfileForm(forms.ModelForm):
+	class Meta:
+		model = UserProfile
+		exclude = ['user']

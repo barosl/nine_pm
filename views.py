@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from models import *
@@ -8,6 +8,7 @@ from datetime import datetime
 from forms import *
 from django.http import HttpResponse
 import time
+from django.contrib.auth import login
 
 def index(req):
 	posts = [Post.objects.filter(forum=forum).order_by('-points')[0] for forum in Forum.objects.all()]
@@ -114,3 +115,27 @@ def user_stay(req, forum_id):
 	user_stay.save()
 
 	return HttpResponse('/* nothing done here */', content_type='application/x-javascript')
+
+def user_new(req):
+	form = UserCreationForm(req.POST if req.POST else None)
+	profile_form = UserProfileForm(req.POST if req.POST else None)
+
+	if form.is_valid() and profile_form.is_valid():
+		user = form.save(commit=False)
+		user.is_staff = True
+		user.is_superuser = True
+		user.save()
+
+		user_profile = profile_form.save(commit=False)
+		user_profile.user = user
+		user_profile.save()
+
+		user.backend = 'django.contrib.auth.backends.ModelBackend'
+		login(req, user)
+
+		return redirect(index)
+
+	return render_to_response('user_new.html', RequestContext(req, {
+		'form': form,
+		'profile_form': profile_form,
+	}))

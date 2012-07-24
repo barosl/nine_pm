@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>가입</h2>
+
+<form method="post" action="{% url nine_pm.views.user_new %}">
+	{% csrf_token %}
+	<input type="hidden" name="mode" value="1" />
+
+	{{form.username.errors}}
+	아이디: {{form.username}}<br />
+	{{form.password1.errors}}
+	비밀번호: {{form.password1}}<br />
+	{{form.password2.errors}}
+	비밀번호 확인: {{form.password2}}<br />
+	{{profile_form.name.errors}}
+	별명: {{profile_form.name}}<br />
+
+	<input type="submit" value="가입하긔" />
+</form>
+
+{% endblock %}

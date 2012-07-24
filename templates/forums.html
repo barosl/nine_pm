@@ -6,6 +6,10 @@
 	{{user.get_profile.name}} 님의 총 접속 시간은 {{hours}}시간 {{mins}}분입니다.
 </div>
 
+{% if user.is_staff %}
+<h3 style="text-align: center;"><a href="{% url admin:index %}">관리자 페이지</a></h3>
+{% endif %}
+
 {% for forum in forums %}
 <div style="float: left; margin-right: 20px;">
 	<a href="{% url nine_pm.views.forum forum.id %}" style="display: block;">
