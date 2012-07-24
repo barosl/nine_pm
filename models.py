@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 class Forum(models.Model):
 	name = models.CharField(max_length=100)
 
-	ex_rate = models.IntegerField()
+	xch_rate = models.IntegerField()
 	img = models.ImageField(upload_to='forums')
 
 	def __unicode__(self):
@@ -42,11 +42,12 @@ class UserProfile(models.Model):
 	def __unicode__(self):
 		return 'User profile of "%s"' % self.user.username
 
-class UserPoints(models.Model):
+class UserStay(models.Model):
 	user = models.ForeignKey(User)
 	forum = models.ForeignKey(Forum)
-	mtime = models.IntegerField()
-	points = models.IntegerField()
+
+	last_seen = models.IntegerField()
+	mins = models.IntegerField()
 
 	def __unicode__(self):
 		return 'User points of "%s"' % self.user.username

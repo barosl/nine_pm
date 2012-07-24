@@ -14,7 +14,7 @@
 
 <form method="post" action="{% url django.contrib.auth.views.login %}">
 	{% csrf_token %}
-	<input type="hidden" name="next" value="{% url nine_pm.views.intro %}" />
+	<input type="hidden" name="next" value="{{next}}" />
 
 	{{form.non_field_errors}}
 

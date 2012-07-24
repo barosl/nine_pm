@@ -9,4 +9,6 @@ urlpatterns = patterns('',
 	url(r'^logout/$', logout, {'next_page': reverse_lazy(index)}),
 	url(r'^intro/$', intro),
 	url(r'^forums/$', forums),
+	url(r'^forum/(\d+)/$', forum),
+	url(r'^post/(\d+)/$', post),
 )
